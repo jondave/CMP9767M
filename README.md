@@ -1,23 +1,24 @@
 # CMP9767M
 
 # Launching the Simulation
-
-* Simple environment single robot, and fake localisation:
+* Simple environment _without_ obstacles, single robot, and fake localisation:
  
-      roslaunch bacchus_gazebo vineyard_demo.launch world_name:=vineyard_small
+      roslaunch uol_cmp9767m_base thorvald-sim.launch obstacles:=false second_robot:=false fake_localisation:=true
+      
+  First two parameters are also the default, so can be launched also as
 
-  The parameter is also the default, so can be launched also as
+      roslaunch uol_cmp9767m_base thorvald-sim.launch fake_localization:=true
+      roslaunch uol_cmp9767m_base thorvald-sim.launch fake_localisation:=true
 
-      roslaunch bacchus_gazebo vineyard_demo.launch
+* Simple environment _without_ obstacles, two robots, and fake localisation:
 
-  The Gazebo simulator is on pause by default after launching so you need to press the 'play' button in the bottom toolbar of Gazebo to start the simulation.
-
-
-* More complex environment with different plant stages:
+      roslaunch uol_cmp9767m_base thorvald-sim.launch obstacles:=false second_robot:=true fake_localisation:=true
+* Realistic environment _with_ obstacles, single robot, and fake localisation (to truly show real navigation abilities, set `fake_localisation:=false` and provide your own map and robot localisation solution):
  
-      roslaunch bacchus_gazebo vineyard_demo.launch world_name:=<WORLD>
+      roslaunch uol_cmp9767m_base thorvald-sim.launch obstacles:=true second_robot:=false fake_localisation:=true
+* Realistic environment _with_ obstacles, two robots, and fake localisation (to truly show real navigation abilities, set `fake_localisation:=false` and provide your own map and robot localisation solution):
+ 
+      roslaunch uol_cmp9767m_base thorvald-sim.launch obstacles:=true second_robot:=true fake_localisation:=true
 
-  with `<WORLD>` being one of `vineyard_small`, `vineyard_stage0`, `vineyard_stage1`, `vineyard_stage2`, `vineyard_stage3`, `vineyard_stage4`, or `vineyard_stage0_heightmap`.
-
-* If you intend to run a real localisation system (e.g. amcl) based on maps then set `fake_localisation:=false`. 
-
+  Also available as [video](https://youtu.be/MPMHnVZvOYo0).
+* If you intend to run a real localisation system (e.g. amcl) based on maps then set `fake_localisation:=false`. If you want to use the provided simple map, you may additionally set `map_server:=true`.
